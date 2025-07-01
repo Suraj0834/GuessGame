@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import StartGameScreen from "./screen/StartGameScreen";
+import GuessScreen from "./screen/GuessScreen";
 
 export default function App() {
+  const [step, setStep] = useState(1);
+  const [userNumber, setUserNumber] = useState(null);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      {step === 1 && (
+        <StartGameScreen
+          userNumber={userNumber}
+          setUserNumber={setUserNumber}
+          step={step}
+          setStep={setStep}
+        />
+      )}
+      {step === 2 && (
+        <GuessScreen
+          userNumber={userNumber}
+          setStep={setStep}
+        />
+      )}
+      <StatusBar hidden />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
